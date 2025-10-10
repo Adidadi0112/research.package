@@ -1,3 +1,27 @@
+## 2.1.1
+
+* minor visual updates
+
+## 2.1.0
+
+* updating RPColors theme to act as carp_styles_package temporarily
+
+## 2.0.2
+
+* fixing nullable variables
+
+## 2.0.1
+
+* fixing asset path
+
+## 2.0.0
+
+* Redesign of informed consent 
+* Redesign of app bar
+* Addition of research_package_styles
+* Major flutter upgrade for example app
+* Major gradle upgrade for exmaple app 
+
 ## 1.9.0
 * Added support for new media types in RPInstructionStep class. Media types include
   - Video 

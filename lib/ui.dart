@@ -11,6 +11,7 @@ library;
 
 import 'dart:async';
 import 'dart:convert';
+import 'dart:ui' as ui;
 import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
@@ -39,6 +40,7 @@ part 'src/ui/consent_review_step.dart';
 part 'src/ui/form_step.dart';
 part 'src/ui/instruction_step.dart';
 part 'src/ui/question_step.dart';
+part 'src/ui/research_package_styles.dart';
 part 'src/ui/task.dart';
 part 'src/ui/visual_consent_step.dart';
 part 'src/ui/activity_step.dart';

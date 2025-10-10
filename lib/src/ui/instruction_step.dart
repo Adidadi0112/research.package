@@ -110,7 +110,7 @@ class RPUIInstructionStepState extends State<RPUIInstructionStep> {
                           ),
                           onPressed: _pushDetailTextRoute,
                           child: Text(locale?.translate('learn_more') ??
-                              "Learn more..."),
+                              "Learn more"),
                         ),
                     ],
                   ),
