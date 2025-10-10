@@ -1,3 +1,11 @@
+## 2.2.0
+* Added support for new media types in RPInstructionStep class. Media types include
+  - Video 
+  - Audio
+  - Image
+Media can be accessed by providing a url in the protocol under an RPInstructionStep by setting it as "video_step": "url".
+* Changed color of BACK button in task to be same as NEXT button.
+
 ## 2.1.1
 
 * minor visual updates
@@ -21,15 +29,6 @@
 * Addition of research_package_styles
 * Major flutter upgrade for example app
 * Major gradle upgrade for exmaple app 
-
-## 1.9.0
-* Added support for new media types in RPInstructionStep class. Media types include
-  - Video 
-  - Audio
-  - Image
-Media can be accessed by providing a url in the protocol under an RPInstructionStep by setting it as "video_step": "url".
-* Changed color of BACK button in task to be same as NEXT button.
-
 
 ## 1.8.0
 
