@@ -248,7 +248,7 @@ class __TextPresenterRouteState extends State<_TextPresenterRoute> {
               TextButton(
                 style: ButtonStyle(
                   backgroundColor: WidgetStateProperty.all(
-                      Theme.of(context).extension<RPColors>()!.primary),
+                      Theme.of(context).extension<CarpColors>()!.primary),
                 ),
                 onPressed: onPressedCallback,
                 child: Text(locale?.translate('AGREE') ?? "AGREE",

@@ -68,7 +68,7 @@ class RPUICompletionStepState extends State<RPUICompletionStep>
               ),
             ),
             ButtonTheme(
-              buttonColor: Theme.of(context).extension<RPColors>()!.primary,
+              buttonColor: Theme.of(context).extension<CarpColors>()!.primary,
               minWidth: 150,
               child: OutlinedButton(
                 onPressed: () {

@@ -10,6 +10,10 @@ class RPUITask extends StatefulWidget {
   /// object with the same identifier as the [task]'s identifier.
   final RPOrderedTask task;
 
+  final Image? carouselBarImage;
+
+  final Color? carouselBarBackgroundColor;
+
   /// The callback function which has to return an [RPTaskResult] object.
   /// This function is called when the participant has finished the last step.
   final void Function(RPTaskResult)? onSubmit;
@@ -30,6 +34,8 @@ class RPUITask extends StatefulWidget {
   const RPUITask({
     super.key,
     required this.task,
+    this.carouselBarImage,
+    this.carouselBarBackgroundColor,
     this.onSubmit,
     this.onCancel,
   });
@@ -61,7 +67,7 @@ class RPUITaskState extends State<RPUITask> with CanSaveResult {
   final PageController _taskPageViewController =
       PageController(keepPage: false);
 
-  bool navigableTask = false;
+  bool _isNavigableTask = false;
 
   @override
   void initState() {
@@ -72,7 +78,7 @@ class RPUITaskState extends State<RPUITask> with CanSaveResult {
     // If it's navigable we don't want to show result on app bar
     if (widget.task is RPNavigableOrderedTask) {
       blocTask.updateTaskProgress(RPTaskProgress(0, widget.task.steps.length));
-      navigableTask = true;
+      _isNavigableTask = true;
     } else {
       // Sending the initial Task Progress so the Question UI can use it in the app bar
       blocTask.updateTaskProgress(RPTaskProgress(
@@ -101,7 +107,7 @@ class RPUITaskState extends State<RPUITask> with CanSaveResult {
           // Updating taskProgress stream
           if (_currentStep.runtimeType == RPQuestionStep) {
             _currentQuestionIndex++;
-            if (!navigableTask) {
+            if (!_isNavigableTask) {
               blocTask.updateTaskProgress(RPTaskProgress(
                   _currentQuestionIndex, widget.task.numberOfQuestionSteps));
             }
@@ -133,7 +139,7 @@ class RPUITaskState extends State<RPUITask> with CanSaveResult {
           } else {
             _currentQuestionIndex--;
             _currentStepIndex--;
-            if (!navigableTask) {
+            if (!_isNavigableTask) {
               blocTask.updateTaskProgress(RPTaskProgress(
                   _currentQuestionIndex, widget.task.numberOfQuestionSteps));
             }
@@ -241,52 +247,55 @@ class RPUITaskState extends State<RPUITask> with CanSaveResult {
   }
 
   Widget _carouselBar(RPLocalizations? locale) {
-    return SizedBox(
-      height: AppBar().preferredSize.height,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Expanded(
-            flex: 5,
-            child: Container(
-              child: Image.asset(
-                'assets/icons/carp_logo_example.png',
-                package: 'research_package',
-                fit: BoxFit.contain,
-                height: 16,
+    return Container(
+      color: widget.carouselBarBackgroundColor ??
+          Theme.of(context).extension<CarpColors>()!.grey100,
+      child: SizedBox(
+        height: AppBar().preferredSize.height,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              flex: 5,
+              child: widget.carouselBarImage ??
+                  Image.asset(
+                    'assets/icons/carp_logo_example.png',
+                    package: 'research_package',
+                    fit: BoxFit.contain,
+                    height: 16,
+                  ),
+            ),
+            // Carousel indicator
+            Expanded(
+              flex: 2,
+              child: (!_isNavigableTask)
+                  ? Text(
+                      '${_currentStepIndex + 1} '
+                      '${locale?.translate('of') ?? 'of'} '
+                      '${widget.task.steps.length}',
+                      style: Theme.of(context).appBarTheme.titleTextStyle,
+                      textAlign: TextAlign.center,
+                    )
+                  : Container(),
+            ),
+            // Close button
+            Expanded(
+              flex: 5,
+              child: IconButton(
+                padding: const EdgeInsets.only(right: 30),
+                alignment: Alignment.centerRight,
+                icon: Icon(
+                  Icons.highlight_off,
+                  color: ((CupertinoTheme.of(context).primaryColor ==
+                          CupertinoColors.activeBlue)
+                      ? Theme.of(context).primaryColor
+                      : CupertinoTheme.of(context).primaryColor),
+                ),
+                onPressed: () => blocTask.sendStatus(RPStepStatus.Canceled),
               ),
             ),
-          ),
-          // Carousel indicator
-          Expanded(
-            flex: 2,
-            child: (!navigableTask)
-                ? Text(
-                    '${_currentStepIndex + 1} '
-                    '${locale?.translate('of') ?? 'of'} '
-                    '${widget.task.steps.length}',
-                    style: Theme.of(context).appBarTheme.titleTextStyle,
-                    textAlign: TextAlign.center,
-                  )
-                : Container(),
-          ),
-          // Close button
-          Expanded(
-            flex: 5,
-            child: IconButton(
-              padding: const EdgeInsets.only(right: 30),
-              alignment: Alignment.centerRight,
-              icon: Icon(
-                Icons.highlight_off,
-                color: ((CupertinoTheme.of(context).primaryColor ==
-                        CupertinoColors.activeBlue)
-                    ? Theme.of(context).primaryColor
-                    : CupertinoTheme.of(context).primaryColor),
-              ),
-              onPressed: () => blocTask.sendStatus(RPStepStatus.Canceled),
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -302,7 +311,8 @@ class RPUITaskState extends State<RPUITask> with CanSaveResult {
       //   return widget.onCancel?.call(_taskResult);
       // },
       child: Scaffold(
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        // backgroundColor: Theme.of(context).extension<CarpColors>()!.grey900,
+        backgroundColor: Theme.of(context).extension<CarpColors>()!.grey100,
         resizeToAvoidBottomInset: true,
         body: SafeArea(
           child: Column(
@@ -310,7 +320,6 @@ class RPUITaskState extends State<RPUITask> with CanSaveResult {
             children: [
               // Top bar
               _carouselBar(locale),
-
               // Body
               Expanded(
                 child: PageView.builder(
@@ -332,7 +341,7 @@ class RPUITaskState extends State<RPUITask> with CanSaveResult {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       // if first question or its a navigable task
-                      _currentStepIndex == 0 || !navigableTask
+                      _currentStepIndex == 0 || !_isNavigableTask
                           ? Container()
                           : OutlinedButton(
                               style: OutlinedButton.styleFrom(
@@ -356,7 +365,7 @@ class RPUITaskState extends State<RPUITask> with CanSaveResult {
                             return ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                   backgroundColor: Theme.of(context)
-                                      .extension<RPColors>()!
+                                      .extension<CarpColors>()!
                                       .primary),
                               onPressed: snapshot.data!
                                   ? () {

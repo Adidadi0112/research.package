@@ -62,76 +62,80 @@ class RPUIInstructionStepState extends State<RPUIInstructionStep> {
   @override
   Widget build(BuildContext context) {
     RPLocalizations? locale = RPLocalizations.of(context);
-    return SafeArea(
-      child: Column(
-        children: <Widget>[
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  // If image is provided show it
-                  if (widget.step.imagePath != null)
-                    Center(
-                      child: SizedBox(
-                        height: MediaQuery.of(context).size.height,
-                        width: MediaQuery.of(context).size.width,
-                        child:
-                            InstructionImage(imagePath: widget.step.imagePath!),
+    return Scaffold(
+      backgroundColor: Theme.of(context).extension<CarpColors>()!.grey100,
+      body: SafeArea(
+        child: Column(
+          children: <Widget>[
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    // If image is provided show it
+                    if (widget.step.imagePath != null)
+                      Center(
+                        child: SizedBox(
+                          height: MediaQuery.of(context).size.height,
+                          width: MediaQuery.of(context).size.width,
+                          child: InstructionImage(
+                              imagePath: widget.step.imagePath!),
+                        ),
                       ),
-                    ),
-                  if (widget.step.videoPath != null)
-                    VideoApp(step: widget.step),
-                  if (widget.step.audioPath != null)
-                    AudioPlayerWidget(player: player),
+                    if (widget.step.videoPath != null)
+                      VideoApp(step: widget.step),
+                    if (widget.step.audioPath != null)
+                      AudioPlayerWidget(player: player),
 
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 30, horizontal: 16),
-                        child: Text(
-                          locale?.translate(widget.step.text!) ??
-                              widget.step.text!,
-                          textAlign: TextAlign.start,
-                          style: Theme.of(context).textTheme.headlineSmall,
-                        ),
-                      ),
-                      if (widget.step.detailText != null)
-                        TextButton(
-                          style: TextButton.styleFrom(
-                            textStyle: TextStyle(
-                              color: (CupertinoTheme.of(context).primaryColor ==
-                                      CupertinoColors.activeBlue)
-                                  ? Theme.of(context).primaryColor
-                                  : CupertinoTheme.of(context).primaryColor,
-                            ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 30, horizontal: 16),
+                          child: Text(
+                            locale?.translate(widget.step.text!) ??
+                                widget.step.text!,
+                            textAlign: TextAlign.start,
+                            style: Theme.of(context).textTheme.headlineSmall,
                           ),
-                          onPressed: _pushDetailTextRoute,
-                          child: Text(locale?.translate('learn_more') ??
-                              "Learn more"),
                         ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
-          if (widget.step.footnote != null)
-            Center(
-              child: Container(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  locale?.translate(widget.step.footnote!) ??
-                      widget.step.footnote!,
-                  style: Theme.of(context).textTheme.bodySmall,
-                  textAlign: TextAlign.center,
-                  softWrap: true,
+                        if (widget.step.detailText != null)
+                          TextButton(
+                            style: TextButton.styleFrom(
+                              textStyle: TextStyle(
+                                color: (CupertinoTheme.of(context)
+                                            .primaryColor ==
+                                        CupertinoColors.activeBlue)
+                                    ? Theme.of(context).primaryColor
+                                    : CupertinoTheme.of(context).primaryColor,
+                              ),
+                            ),
+                            onPressed: _pushDetailTextRoute,
+                            child: Text(locale?.translate('learn_more') ??
+                                "Learn more"),
+                          ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
             ),
-        ],
+            if (widget.step.footnote != null)
+              Center(
+                child: Container(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    locale?.translate(widget.step.footnote!) ??
+                        widget.step.footnote!,
+                    style: Theme.of(context).textTheme.bodySmall,
+                    textAlign: TextAlign.center,
+                    softWrap: true,
+                  ),
+                ),
+              ),
+          ],
+        ),
       ),
     );
   }

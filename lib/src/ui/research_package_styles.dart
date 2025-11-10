@@ -253,11 +253,11 @@ ThemeData researchPackageDarkTheme = ThemeData.dark().copyWith(
 TextStyle visualConsentStepTileStyle = const TextStyle(
     fontSize: 20, fontWeight: FontWeight.w700, letterSpacing: 0);
 
-TextStyle visualConsentStepTitleStyle = const TextStyle(
-    fontSize: 24, fontWeight: FontWeight.w700, letterSpacing: 0);
+// TextStyle visualConsentStepTitleStyle = const TextStyle(
+//     fontSize: 24, fontWeight: FontWeight.w700, letterSpacing: 0);
 
-TextStyle visualConsentStepSummaryStyle = const TextStyle(
-    fontSize: 16, fontWeight: FontWeight.w400, letterSpacing: 0);
+// TextStyle visualConsentStepSummaryStyle = const TextStyle(
+//     fontSize: 16, fontWeight: FontWeight.w400, letterSpacing: 0);
 
 TextStyle studyTitleStyle =
     const TextStyle(fontSize: 24, fontWeight: FontWeight.w600);

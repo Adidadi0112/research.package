@@ -1,10 +1,8 @@
 PODS:
   - audioplayers_darwin (0.0.1):
     - Flutter
-  - Flutter (1.0.0)
-  - just_audio (0.0.1):
-    - Flutter
     - FlutterMacOS
+  - Flutter (1.0.0)
   - path_provider_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
@@ -13,33 +11,27 @@ PODS:
     - FlutterMacOS
 
 DEPENDENCIES:
-  - audioplayers_darwin (from `.symlinks/plugins/audioplayers_darwin/ios`)
+  - audioplayers_darwin (from `.symlinks/plugins/audioplayers_darwin/darwin`)
   - Flutter (from `Flutter`)
-  - just_audio (from `.symlinks/plugins/just_audio/darwin`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
   - video_player_avfoundation (from `.symlinks/plugins/video_player_avfoundation/darwin`)
 
 EXTERNAL SOURCES:
   audioplayers_darwin:
-    :path: ".symlinks/plugins/audioplayers_darwin/ios"
+    :path: ".symlinks/plugins/audioplayers_darwin/darwin"
   Flutter:
     :path: Flutter
-  just_audio:
-    :path: ".symlinks/plugins/just_audio/darwin"
   path_provider_foundation:
     :path: ".symlinks/plugins/path_provider_foundation/darwin"
   video_player_avfoundation:
     :path: ".symlinks/plugins/video_player_avfoundation/darwin"
 
 SPEC CHECKSUMS:
-  audio_session: 9bb7f6c970f21241b19f5a3658097ae459681ba0
-  audioplayers_darwin: 877d9a4d06331c5c374595e46e16453ac7eafa40
-  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
-  just_audio: 4e391f57b79cad2b0674030a00453ca5ce817eed
-  path_provider_foundation: 080d55be775b7414fd5a5ef3ac137b97b097e564
-  path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
-  video_player_avfoundation: 7c6c11d8470e1675df7397027218274b6d2360b3
+  audioplayers_darwin: 4f9ca89d92d3d21cec7ec580e78ca888e5fb68bd
+  Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
+  path_provider_foundation: bb55f6dbba17d0dccd6737fe6f7f34fbd0376880
+  video_player_avfoundation: dd410b52df6d2466a42d28550e33e4146928280a
 
-PODFILE CHECKSUM: 740578d4e64ee51c39ea1acb9b29aa0c2fab78bf
+PODFILE CHECKSUM: 13c8060114aebcc06454a991a9a6a3ff96343e2c
 
 COCOAPODS: 1.16.2

@@ -63,7 +63,7 @@ class RPUIVisualConsentStepState extends State<RPUIVisualConsentStep>
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                   backgroundColor:
-                      Theme.of(context).extension<RPColors>()!.primary),
+                      Theme.of(context).extension<CarpColors>()!.primary),
               child: Text(
                 RPLocalizations.of(context)?.translate('YES') ?? 'YES',
                 style: Theme.of(context).primaryTextTheme.labelLarge,
@@ -237,8 +237,8 @@ class RPUIVisualConsentStepState extends State<RPUIVisualConsentStep>
               padding: const EdgeInsets.symmetric(vertical: 20),
               child: Text(
                 locale?.translate(section.title) ?? section.title,
-                style: visualConsentStepTitleStyle.copyWith(
-                  color: Theme.of(context).extension<RPColors>()!.primary,
+                style: fs24fw700ls0.copyWith(
+                  color: Theme.of(context).extension<CarpColors>()!.primary,
                 ),
                 textAlign: TextAlign.start,
               ),
@@ -283,16 +283,16 @@ class RPUIVisualConsentStepState extends State<RPUIVisualConsentStep>
               children: <Widget>[
                 Text(
                   locale?.translate(section.title) ?? section.title,
-                  style: visualConsentStepTitleStyle.copyWith(
-                    color: Theme.of(context).extension<RPColors>()!.primary,
+                  style: fs24fw700ls0.copyWith(
+                    color: Theme.of(context).extension<CarpColors>()!.primary,
                   ),
                   textAlign: TextAlign.start,
                 ),
                 const SizedBox(height: 5),
                 Text(
                   locale?.translate(section.summary) ?? section.summary,
-                  style: visualConsentStepSummaryStyle.copyWith(
-                    color: Theme.of(context).extension<RPColors>()!.grey900,
+                  style: fs16fw400ls0.copyWith(
+                    color: Theme.of(context).extension<CarpColors>()!.grey900,
                   ),
                 ),
                 const SizedBox(height: 30),
@@ -306,7 +306,7 @@ class RPUIVisualConsentStepState extends State<RPUIVisualConsentStep>
                         "Learn more",
                     style: Theme.of(context).textTheme.titleLarge!.copyWith(
                         color:
-                            Theme.of(context).extension<RPColors>()!.primary),
+                            Theme.of(context).extension<CarpColors>()!.primary),
                   ),
                 ),
               ],
@@ -327,8 +327,8 @@ class RPUIVisualConsentStepState extends State<RPUIVisualConsentStep>
             height: 4, // Thickness of the indicator
             decoration: BoxDecoration(
               color: index < _pageNr
-                  ? Theme.of(context).extension<RPColors>()!.primary
-                  : Theme.of(context).extension<RPColors>()!.grey300,
+                  ? Theme.of(context).extension<CarpColors>()!.primary
+                  : Theme.of(context).extension<CarpColors>()!.grey300,
               borderRadius: BorderRadius.circular(4),
             ),
           ),
@@ -354,7 +354,7 @@ class RPUIVisualConsentStepState extends State<RPUIVisualConsentStep>
           TextButton(
             style: ButtonStyle(
               backgroundColor: WidgetStateProperty.all(
-                  Theme.of(context).extension<RPColors>()!.primary),
+                  Theme.of(context).extension<CarpColors>()!.primary),
             ),
             onPressed: _lastPage
                 ? () => blocTask.sendStatus(RPStepStatus.Finished)
@@ -429,8 +429,8 @@ class DataCollectionListItemState extends State<DataCollectionListItem> {
       title: Text(
         locale?.translate(widget.dataTypeSection.dataName) ??
             widget.dataTypeSection.dataName,
-        style: visualConsentStepTileStyle.copyWith(
-          color: Theme.of(context).extension<RPColors>()!.grey900,
+        style: fs20fw700ls0.copyWith(
+          color: Theme.of(context).extension<CarpColors>()!.grey900,
         ),
         textAlign: TextAlign.start,
       ),
