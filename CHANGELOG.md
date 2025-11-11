@@ -1,6 +1,13 @@
 ## 2.2.0
 
 * Removing Research Package styles, integrating carp_themes_package instead.
+* Added support for new media types in RPInstructionStep class. Media types include
+  - Video 
+  - Audio
+  - Image
+Media can be accessed by providing a url in the protocol under an RPInstructionStep by setting it as "video_step": "url".
+* Changed color of BACK button in task to be same as NEXT button.
+
 
 ## 2.1.1
 
