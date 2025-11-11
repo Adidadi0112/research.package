@@ -221,8 +221,9 @@ RPOrderedTask get consentTask {
     detailText:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ultricies feugiat turpis nec efficitur. Integer in pharetra libero. Proin a leo eu enim porttitor hendrerit. Suspendisse vestibulum interdum mollis. Donec in sapien ut orci ultricies laoreet. Ut maximus ante id arcu feugiat scelerisque. Proin non rutrum libero. Aliquam blandit arcu ac dolor consequat maximus. Integer et dolor quis quam tempor porta quis vel nibh. Phasellus ullamcorper fringilla lorem, ac tempus sem cursus a. Aliquam maximus facilisis quam. Morbi hendrerit tempor tellus, ac hendrerit augue tincidunt eu. Cras convallis lorem at nulla mattis tristique.",
     footnote: "(1) Important footnote",
-    // imagePath: "assets/images/waving-hand.png",
-    videoPath: "assets/video/colors.mp4",
+    imagePath: "assets/images/waving-hand.png",
+    // videoPath: "assets/video/colors.mp4",
+    audioPath: "audio/test_audio.mp3",
     text: "informed_consent.welcome_text",
   );
 
