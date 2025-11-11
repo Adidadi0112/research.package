@@ -1,3 +1,7 @@
+## 2.3.0
+
+* Removing Research Package styles, integrating carp_themes_package instead
+
 ## 2.2.0
 * Added support for new media types in RPInstructionStep class. Media types include
   - Video 
