@@ -375,7 +375,7 @@ class _VideoAppState extends State<VideoApp> {
   }
 
   void _toggleFullScreen() {
-    Navigator.of(context).push(MaterialPageRoute(
+    Navigator.of(context).push(MaterialPageRoute<dynamic>(
       builder: (context) => FullscreenVideoPlayer(
         controller: _controller,
         onExitFullScreen: () {
@@ -486,9 +486,21 @@ class FullscreenVideoPlayer extends StatelessWidget {
                 }
               },
               child: controller.value.isInitialized
-                  ? AspectRatio(
-                      aspectRatio: controller.value.aspectRatio,
-                      child: VideoPlayer(controller),
+                  ? SizedBox.expand(
+                      // Fill the available space and scale the video to cover
+                      // (this will crop the video if its aspect ratio doesn't
+                      // match the device's aspect ratio).
+                      child: FittedBox(
+                        fit: BoxFit.cover,
+                        alignment: Alignment.center,
+                        child: SizedBox(
+                          // Use the video's intrinsic size when available,
+                          // otherwise fall back to the screen size.
+                          width: controller.value.size.width,
+                          height: controller.value.size.height,
+                          child: VideoPlayer(controller),
+                        ),
+                      ),
                     )
                   : const CircularProgressIndicator(),
             ),
