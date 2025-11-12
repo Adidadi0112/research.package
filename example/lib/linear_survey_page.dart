@@ -36,7 +36,7 @@ class LinearSurveyPage extends StatelessWidget {
         height: 16,
       ),
       carouselBarBackgroundColor:
-          Theme.of(context).extension<CarpColors>()!.grey100,
+          Theme.of(context).extension<CarpColors>()!.backgroundGray,
       // onCancel: (RPTaskResult? result) {
       //   if (result == null) {
       //     print("No result");

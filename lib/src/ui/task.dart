@@ -249,7 +249,7 @@ class RPUITaskState extends State<RPUITask> with CanSaveResult {
   Widget _carouselBar(RPLocalizations? locale) {
     return Container(
       color: widget.carouselBarBackgroundColor ??
-          Theme.of(context).extension<CarpColors>()!.grey100,
+          Theme.of(context).extension<CarpColors>()!.backgroundGray,
       child: SizedBox(
         height: AppBar().preferredSize.height,
         child: Row(
@@ -311,8 +311,8 @@ class RPUITaskState extends State<RPUITask> with CanSaveResult {
       //   return widget.onCancel?.call(_taskResult);
       // },
       child: Scaffold(
-        // backgroundColor: Theme.of(context).extension<CarpColors>()!.grey900,
-        backgroundColor: Theme.of(context).extension<CarpColors>()!.grey100,
+        backgroundColor:
+            Theme.of(context).extension<CarpColors>()!.backgroundGray,
         resizeToAvoidBottomInset: true,
         body: SafeArea(
           child: Column(
