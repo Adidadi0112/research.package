@@ -22,6 +22,7 @@ class RPUIVisualConsentStepState extends State<RPUIVisualConsentStep>
   @override
   void initState() {
     super.initState();
+    _totalPages = widget.consentDocument.sections.length;
   }
 
   void _goToNextPage(int pageNr) {
@@ -218,7 +219,6 @@ class RPUIVisualConsentStepState extends State<RPUIVisualConsentStep>
   }
 
   Widget _consentSectionPageBuilder(BuildContext context, int index) {
-    _totalPages = widget.consentDocument.sections.length;
     RPConsentSection section = widget.consentDocument.sections[index];
     RPLocalizations? locale = RPLocalizations.of(context);
 
@@ -232,7 +232,6 @@ class RPUIVisualConsentStepState extends State<RPUIVisualConsentStep>
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            _progressIndicator(),
             Container(
               padding: const EdgeInsets.symmetric(vertical: 20),
               child: Text(
@@ -266,7 +265,6 @@ class RPUIVisualConsentStepState extends State<RPUIVisualConsentStep>
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            _progressIndicator(),
             Center(
               child: Stack(
                 children: [
@@ -318,22 +316,26 @@ class RPUIVisualConsentStepState extends State<RPUIVisualConsentStep>
   }
 
   Widget _progressIndicator() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: List.generate(_totalPages - 1, (index) {
-        return Expanded(
-          child: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 4.0),
-            height: 4, // Thickness of the indicator
-            decoration: BoxDecoration(
-              color: index < _pageNr
-                  ? Theme.of(context).extension<CarpColors>()!.primary
-                  : Theme.of(context).extension<CarpColors>()!.grey300,
-              borderRadius: BorderRadius.circular(4),
+    if (_totalPages <= 1) return const SizedBox.shrink();
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: List.generate(_totalPages - 1, (index) {
+          return Expanded(
+            child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 4.0),
+              height: 4, // Thickness of the indicator
+              decoration: BoxDecoration(
+                color: index < _pageNr
+                    ? Theme.of(context).extension<CarpColors>()!.primary
+                    : Theme.of(context).extension<CarpColors>()!.grey300,
+                borderRadius: BorderRadius.circular(4),
+              ),
             ),
-          ),
-        );
-      }),
+          );
+        }),
+      ),
     );
   }
 
@@ -386,11 +388,13 @@ class RPUIVisualConsentStepState extends State<RPUIVisualConsentStep>
     return PopScope<RPUIVisualConsentStep>(
       canPop: false,
       child: Scaffold(
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        backgroundColor:
+            Theme.of(context).extension<CarpColors>()!.backgroundGray,
         body: SafeArea(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
+              _progressIndicator(),
               Expanded(
                 child: PageView.builder(
                   onPageChanged: (pageNr) {
