@@ -2,14 +2,15 @@ allprojects {
     repositories {
         google()
         mavenCentral()
+        flatDir {
+            dirs "$rootDir/libs"
+        }
     }
 }
 
 rootProject.buildDir = '../build'
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
-}
-subprojects {
     project.evaluationDependsOn(':app')
 }
 

@@ -11,13 +11,14 @@ library;
 
 import 'dart:async';
 import 'dart:convert';
-import 'dart:ui' as ui;
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:just_audio/just_audio.dart';
 import 'package:signature/signature.dart';
+import 'package:audioplayers/audioplayers.dart';
+import 'package:video_player/video_player.dart';
+import 'package:carp_themes_package/carp_themes_package.dart';
 
 import 'model.dart';
 
@@ -36,8 +37,10 @@ part 'src/ui/completion_step.dart';
 part 'src/ui/consent_review_step.dart';
 part 'src/ui/form_step.dart';
 part 'src/ui/instruction_step.dart';
+part 'src/ui/instruction_step.audio_instruction.dart';
+part 'src/ui/instruction_step.image_instruction.dart';
+part 'src/ui/instruction_step.video_instruction.dart';
 part 'src/ui/question_step.dart';
-part 'src/ui/research_package_styles.dart';
 part 'src/ui/task.dart';
 part 'src/ui/visual_consent_step.dart';
 part 'src/ui/activity_step.dart';
