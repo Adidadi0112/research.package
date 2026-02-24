@@ -31,6 +31,11 @@ class RPUITask extends StatefulWidget {
   /// without doing anything with the result.
   final void Function(RPTaskResult? result)? onCancel;
 
+  /// Flag to hide the "Next" button.
+  /// If set to `true`, the next button will not be displayed.
+  /// Defaults to `false`.
+  final bool hideNextButton;
+
   const RPUITask({
     super.key,
     required this.task,
@@ -38,6 +43,7 @@ class RPUITask extends StatefulWidget {
     this.carouselBarBackgroundColor,
     this.onSubmit,
     this.onCancel,
+    this.hideNextButton = false,
   });
 
   @override
@@ -332,8 +338,12 @@ class RPUITaskState extends State<RPUITask> with CanSaveResult {
               ),
 
               // Bottom navigation
-              if (![RPCompletionStep, RPVisualConsentStep, RPConsentReviewStep, RPActivityStep]
-                  .contains(_currentStep.runtimeType))
+              if (![
+                RPCompletionStep,
+                RPVisualConsentStep,
+                RPConsentReviewStep,
+                RPActivityStep
+              ].contains(_currentStep.runtimeType))
                 Padding(
                   padding:
                       const EdgeInsets.only(left: 15, right: 15, bottom: 10),
@@ -358,35 +368,38 @@ class RPUITaskState extends State<RPUITask> with CanSaveResult {
                                 style: const TextStyle(color: Colors.white),
                               ),
                             ),
-                      StreamBuilder<bool>(
-                        stream: blocQuestion.questionReadyToProceed,
-                        builder: (context, snapshot) {
-                          if (snapshot.hasData) {
-                            return ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  backgroundColor: Theme.of(context)
-                                      .extension<CarpColors>()!
-                                      .primary),
-                              onPressed: snapshot.data!
-                                  ? () {
-                                      FocusManager.instance.primaryFocus
-                                          ?.unfocus();
-                                      blocTask
-                                          .sendStatus(RPStepStatus.Finished);
-                                    }
-                                  : null,
-                              child: Text(
-                                style: const TextStyle(color: Colors.white),
-                                RPLocalizations.of(context)
-                                        ?.translate('NEXT') ??
-                                    "NEXT",
-                              ),
-                            );
-                          } else {
-                            return Container();
-                          }
-                        },
-                      ),
+                      !widget.hideNextButton
+                          ? StreamBuilder<bool>(
+                              stream: blocQuestion.questionReadyToProceed,
+                              builder: (context, snapshot) {
+                                if (snapshot.hasData) {
+                                  return ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                        backgroundColor: Theme.of(context)
+                                            .extension<CarpColors>()!
+                                            .primary),
+                                    onPressed: snapshot.data!
+                                        ? () {
+                                            FocusManager.instance.primaryFocus
+                                                ?.unfocus();
+                                            blocTask.sendStatus(
+                                                RPStepStatus.Finished);
+                                          }
+                                        : null,
+                                    child: Text(
+                                      style:
+                                          const TextStyle(color: Colors.white),
+                                      RPLocalizations.of(context)
+                                              ?.translate('NEXT') ??
+                                          "NEXT",
+                                    ),
+                                  );
+                                } else {
+                                  return Container();
+                                }
+                              },
+                            )
+                          : Container(),
                     ],
                   ),
                 ),
