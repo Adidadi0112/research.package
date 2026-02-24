@@ -332,7 +332,7 @@ class RPUITaskState extends State<RPUITask> with CanSaveResult {
               ),
 
               // Bottom navigation
-              if (![RPCompletionStep, RPVisualConsentStep, RPConsentReviewStep]
+              if (![RPCompletionStep, RPVisualConsentStep, RPConsentReviewStep, RPActivityStep]
                   .contains(_currentStep.runtimeType))
                 Padding(
                   padding:
