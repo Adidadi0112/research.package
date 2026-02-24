@@ -338,12 +338,8 @@ class RPUITaskState extends State<RPUITask> with CanSaveResult {
               ),
 
               // Bottom navigation
-              if (![
-                RPCompletionStep,
-                RPVisualConsentStep,
-                RPConsentReviewStep,
-                RPActivityStep
-              ].contains(_currentStep.runtimeType))
+              if (![RPVisualConsentStep, RPConsentReviewStep, RPActivityStep]
+                  .contains(_currentStep.runtimeType))
                 Padding(
                   padding:
                       const EdgeInsets.only(left: 15, right: 15, bottom: 10),
@@ -368,7 +364,8 @@ class RPUITaskState extends State<RPUITask> with CanSaveResult {
                                 style: const TextStyle(color: Colors.white),
                               ),
                             ),
-                      !widget.hideNextButton
+                      !widget.hideNextButton &&
+                              _currentStep?.runtimeType != RPInstructionStep
                           ? StreamBuilder<bool>(
                               stream: blocQuestion.questionReadyToProceed,
                               builder: (context, snapshot) {
